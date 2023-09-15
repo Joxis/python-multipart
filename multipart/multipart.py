@@ -10,6 +10,9 @@ import tempfile
 from io import BytesIO
 from numbers import Number
 
+from requests.structures import CaseInsensitiveDict
+
+
 # Unique missing object.
 _missing = object()
 
@@ -1814,6 +1817,7 @@ def create_form_parser(headers, on_field, on_file, trust_x_headers=False,
 
     :param config: Configuration variables to pass to the FormParser.
     """
+    headers = CaseInsensitiveDict(headers)
     content_type = headers.get('Content-Type')
     if content_type is None:
         logging.getLogger(__name__).warning("No Content-Type header given")
